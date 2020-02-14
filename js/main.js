@@ -1,9 +1,11 @@
 (() => {
   //make a reference to all the buttons
-  const buttons = document.querySelectorAll('button'),
+  const playButtons = document.querySelectorAll('.playButton'),
+        pauseButtons = document.querySelectorAll('.pauseButton'),
+        rewindButtons = document.querySelectorAll('.rewindButton'),
         audioElement = document.querySelector('audio');
 
-  //lay the song associated with the buttons
+  //lay the song associated with the playButtons
   function playTrack()
   {
     let audioSource = this.dataset.trackref;
@@ -15,7 +17,19 @@
     audioElement.play();
   }
 
-  //process the buttons and add some event handling
-  buttons.forEach(button => button.addEventListener("click", playTrack));
+  function pauseTrack()
+  {
+    audioElement.pause();
+  }
+
+  function rewindTrack()
+  {
+    audioElement.currentTime = 0;
+  }
+
+  //process the playButtons and add some event handling
+  playButtons.forEach(button => button.addEventListener("click", playTrack));
+  pauseButtons.forEach(button => button.addEventListener("click", pauseTrack));
+  rewindButtons.forEach(button => button.addEventListener("click", rewindTrack));
 
 })();
